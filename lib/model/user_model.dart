@@ -3,6 +3,7 @@ class UserModel {
   final String lastname;
   final String email;
   final String phone;
+  final String profileImageUrl;
 
 
   UserModel({
@@ -10,6 +11,7 @@ class UserModel {
     required this.lastname,
     required this.email,
     required this.phone,
+    required this.profileImageUrl,
 
   });
 
@@ -19,6 +21,7 @@ class UserModel {
       'lastname': lastname,
       'email': email,
       'phone': phone,
+      'profileImageUrl' : profileImageUrl,
 
     };
   }
@@ -29,6 +32,7 @@ class UserModel {
       lastname: json['lastname'],
       email: json['email'],
       phone: json['phone'],
+      profileImageUrl :json['profileImageUrl'],
 
     );
   }

@@ -32,6 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _pickedImage = File(pickedFile.path);
       });
+      await signUpController.uploadImageToStorage(_pickedImage!);
     }
   }
 
@@ -48,7 +49,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: [
                 SizedBox(height: 20.h),
                 RowWidget(
-                  onpreesed: () {},
+                  ontap: (){},
+                  onpreesed: () {
+
+                  },
                   txt: 'Profile info',
                 ),
                 SizedBox(height: 10.h),
@@ -57,8 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                  children: [
                    _pickedImage != null
                        ? ClipOval(
-                         child: Image.file(
-                                            _pickedImage!,
+                         child: Image.file(_pickedImage!,
                                             height: 100,
                                             width: 100,
                                             fit: BoxFit.cover,
@@ -66,12 +69,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                        )
                        : Container(),
                    Container(
-                     margin: EdgeInsets.symmetric(horizontal: 10),
+                     margin: const EdgeInsets.symmetric(horizontal: 10),
                      child: Column(
                        children: [
-                         Text('Update your Picture',style: TextStyle(color: Colors.black,
+                       const   Text('Update your Picture',style: TextStyle(color: Colors.black,
                              fontWeight: FontWeight.bold,fontSize: 20),),
-                         Text('uploaded a photo under 2 MB'),
+                        const  Text('uploaded a photo under 2 MB'),
           
                          Row(
                            children: [
@@ -83,15 +86,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                    borderRadius: BorderRadius.circular(5),
                                  ),
                                ),
-                               child: Row(
+                               child: const Row(
                                  children: [
                                    Icon(Icons.account_tree_outlined),
-                                   const Text('Upload'),
+                                    Text('Upload'),
                                  ],
                                ),
                              ),
                              SizedBox(width: 5.w,),
-                             Text('Delete current picture',style: TextStyle(color: Colors.red,
+                             const Text('Delete current picture',style: TextStyle(color: Colors.red,
                                  fontWeight: FontWeight.bold,fontSize: 10)),
                            ],
                          ),
@@ -101,26 +104,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                  ],
                ),
                 SizedBox(height: 20.h,),
-                Text('First Name',style: TextStyle(color: Colors.black,
+               const  Text('First Name',style: TextStyle(color: Colors.black,
                     fontWeight: FontWeight.bold,fontSize: 15),),
                 SizedBox(height: 5.h,),
                 FormContainerWidget(
                   controller: firstNameController,
 
                     hintText: ''),
-                Text('Last Name',style: TextStyle(color: Colors.black,
+               const  Text('Last Name',style: TextStyle(color: Colors.black,
                     fontWeight: FontWeight.bold,fontSize: 15),),
                 SizedBox(height: 10.h,),
                 FormContainerWidget(
                   controller: lastNameController,
                     hintText: ''),
-                Text('Email',style: TextStyle(color: Colors.black,
+               const  Text('Email',style: TextStyle(color: Colors.black,
                     fontWeight: FontWeight.bold,fontSize: 15),),
                 SizedBox(height: 10.h,),
                 FormContainerWidget(
                   controller: phoneController,
                     hintText: ''),
-                Text('Phone Number',style: TextStyle(color: Colors.black,
+                const Text('Phone Number',style: TextStyle(color: Colors.black,
                     fontWeight: FontWeight.bold,fontSize: 15),),
                 SizedBox(height: 10.h,),
                 FormContainerWidget(
@@ -132,10 +135,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     text: 'Change your password',
                     onPressed: (){
                       signUpController.addUserData(
-                        firstNameController.text,
-                        lastNameController.text,
-                        emailController.text,
-                        phoneController.text,
+                        firstNameController.text.trim(),
+                        lastNameController.text.trim(),
+                        emailController.text.trim(),
+                        phoneController.text.trim(),
+                        _pickedImage,
                       );
 
                       Get.to(()=>ForgotScreen());
